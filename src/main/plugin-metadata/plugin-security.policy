@@ -1,0 +1,11 @@
+// ES permission you should check before doPrivileged() blocks
+import org.elasticsearch.SpecialPermission;
+
+SecurityManager sm = System.getSecurityManager();
+if (sm != null) {
+  // unprivileged code such as scripts do not have SpecialPermission
+  sm.checkPermission(new SpecialPermission());
+}
+AccessController.doPrivileged(
+  // sensitive operation
+);
